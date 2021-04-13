@@ -1,58 +1,96 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import image from "./../assets/motor.jpeg";
 
-const ChildView = ({ data, parentId }) => {
-  return data
-    .filter((childItem) => {
-      return parentId === childItem.parent_objective_id;
-    })
-    .map((item, index) => {
-      return (
-        <li key={index}>
-          <div style={{ display: "flex" }}>{item.title}</div>
-        </li>
-      );
-    });
-};
-
-const HomeScreen = ({ OkrData }) => {
-  const [showChild, setShowChild] = useState(false);
-  const [accordionId, setAccordionId] = useState(0);
+const HomeScreen = ({ data }) => {
+  const keysMapNames = {
+    modelNumber: "Model Number",
+    serialNumber: "Serial Number",
+    description: "Description",
+    location: "Location",
+  };
   return (
-    <div>
-      <ol>
-        {OkrData &&
-          OkrData.map((item, index) => {
-            if (item.parent_objective_id == "")
-              return (
-                <div style={{ display: "flex" }}>
-                  <p style={{ width: "10%" }}>
-                    {showChild && (
-                      <FontAwesomeIcon icon={faCaretDown} size="xs" />
-                    )}
-                  </p>
-                  <li
-                    style={{ width: "90%" }}
-                    key={index}
-                    onClick={() => {
-                      setShowChild(!showChild);
-                      setAccordionId(index);
-                    }}
-                  >
-                    <p style={{ display: "flex" }}>{item.title}</p>
-                    {showChild && accordionId == index && (
-                      <ol type="a">
-                        {OkrData && (
-                          <ChildView data={OkrData} parentId={item.id} />
-                        )}
-                      </ol>
-                    )}
-                  </li>
+    <div className="container-fluid float-sm-left cardContainer">
+      {data.map((item) => {
+        return (
+          <>
+            <p className="subject">{item.name}</p>
+            <div className="row cardContainer bgColor ">
+              <div className="col-3">
+                <img src={image} className="img-thumbnail" />
+              </div>
+              <div className="col-xl-6 col-lg-6 col-sm-12 bgColor">
+                <div className="col-12 h-100">
+                  <table>
+                    <tr className="border-bottom">
+                      <td className="col-6 text-left">
+                        {keysMapNames.modelNumber}
+                      </td>
+                      <td className="col-6 text-left">{item.modelNumber}</td>
+                    </tr>
+                    <tr className="border-bottom">
+                      <td className="col-6 text-left">
+                        {keysMapNames.serialNumber}
+                      </td>
+                      <td className="col-6 text-left">{item.serialNumber}</td>
+                    </tr>
+                    <tr className="border-bottom">
+                      <td className="col-6 text-left">
+                        {keysMapNames.description}
+                      </td>
+                      <td className="col-6 text-left">{item.description}</td>
+                    </tr>
+                    <tr>
+                      <td className="col-6 text-left">
+                        {keysMapNames.location}
+                      </td>
+                      <td className="col-6 text-left">{item.location}</td>
+                    </tr>
+                  </table>
                 </div>
-              );
-          })}
-      </ol>
+              </div>
+              <div className="col-3 bgColor align-middle d-none d-sm-none d-md-none d-lg-flex customCard">
+                <div class="col-12 h-50 d-table row customTable">
+                  <div class="card card-block align-middle d-table-cell text-dark border-dark h-100">
+                    <div class="card-header">Running:</div>
+                    <div class="card-body">
+                      <a href="#" class="card-link">
+                        Alerts
+                      </a>
+                      <p class="card-text">Weekly Total </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 bgColor align-middle d-none d-sm-block d-xs-block d-md-block d-xl-none d-lg-none">
+                <div class="col-12 h-50 d-table row">
+                  <div class="card card-block align-middle d-table-cell text-dark border-dark h-100">
+                    <div class="card-header">Running:</div>
+                    <div class="card-body">
+                      <a href="#" class="card-link">
+                        Alerts
+                      </a>
+                      <p class="card-text">Weekly Total </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 bgColor align-middle d-flex d-sm-none">
+                <div class="col-12 h-50 d-table row">
+                  <div class="card card-block align-middle d-table-cell text-dark border-dark h-100">
+                    <div class="card-header">Running:</div>
+                    <div class="card-body">
+                      <a href="#" class="card-link">
+                        Alerts
+                      </a>
+                      <p class="card-text">Weekly Total </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        );
+      })}
     </div>
   );
 };

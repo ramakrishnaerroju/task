@@ -1,14 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import HomeScreenView from "./HomeScreen";
-import useOkrData from "../hooks/useOkrData";
 
 const HomeScreenWrapper = () => {
-  const { OkrData, loading, error } = useOkrData();
-
-  if (loading) <h1>Loading...</h1>;
-  if (error) <h2>Some error</h2>;
-  console.log(OkrData);
-  return <HomeScreenView OkrData={OkrData}></HomeScreenView>;
+  const [data] = useState([
+    {
+      name: "Saint Mary Street Pump Station: CNTRF105M847638",
+      modelNumber: "CNTRF10",
+      serialNumber: "CNTRF10B7836748CC",
+      description: "Pump for station 834739",
+      location: "Needham, MA",
+    },
+    {
+      name: "Saint Mary Street Pump Station: CNTRF105M847638",
+      modelNumber: "CNTRF11",
+      serialNumber: "CNTRF10B7836748CC",
+      description: "Pump for station 834734",
+      location: "Needham, MA",
+    },
+    {
+      name: "Saint Mary Street Pump Station: CNTRF105M847638",
+      modelNumber: "CNTRF14",
+      serialNumber: "CNTRF10B7836748CC",
+      description: "Pump for station 834639",
+      location: "Needham, MA",
+    },
+    {
+      name: "Saint Mary Street Pump Station: CNTRF105M847638",
+      modelNumber: "CNTRF15",
+      serialNumber: "CNTRF10B7836748CC",
+      description: "Pump for station 834734",
+      location: "Needham, MA",
+    },
+    {
+      name: "Saint Mary Street Pump Station: CNTRF105M847638",
+      modelNumber: "CNTRF18",
+      serialNumber: "CNTRF10B7836748CC",
+      description: "Pump for station 834639",
+      location: "Needham, MA",
+    },
+  ]);
+  return <HomeScreenView data={data}></HomeScreenView>;
 };
 
 export default HomeScreenWrapper;
